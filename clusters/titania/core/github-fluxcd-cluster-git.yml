@@ -8,6 +8,4 @@ spec:
   interval: 1m0s
   ref:
     branch: main
-  secretRef:
-    name: fluxcd-auth
   url: ssh://git@github.com/a1994sc/fluxcd
