@@ -1,0 +1,41 @@
+# start with a default flux deployment
+resources:
+- gotk-components.yml
+
+patches:
+  - target:
+      kind: Deployment
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: whatever
+      spec:
+        replicas: 3
+        template:
+          metadata:
+            annotations:
+              # Required by Kubernetes node autoscaler
+              cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+          spec:
+            imagePullSecrets:
+            - name: private-registry
+            terminationGracePeriodSeconds: 60
+            # Required by Pod Security Policy
+            securityContext:
+              runAsUser: 1000
+              fsGroup: 1000
+            containers:
+              - name: manager
+                # Required by Pod Security Policy
+                securityContext:
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                  privileged: false
+                  readOnlyRootFilesystem: true
+                  allowPrivilegeEscalation: false
+                  runAsNonRoot: true
+                  capabilities:
+                    drop:
+                      - ALL
+                  $patch: replace

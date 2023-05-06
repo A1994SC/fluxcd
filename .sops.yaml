@@ -1,0 +1,17 @@
+keys:
+  - &allen    71DADA7922B3E08101B3341369C476704F97DBDA
+  - &titania  B270E03084957BDD7272F1CB5C30E63DCE53ED08
+  # - &oberon   222222222222222222222222222222222222222E
+creation_rules:
+  - path_regex: clusters/titania/.*secrets.*
+    encrypted_regex: ^(data|stringData)$
+    key_groups:
+      - pgp:
+        - *titania
+        - *allen
+  # - path_regex: clusters/oberon/.*enc.*
+  #   encrypted_regex: ^(data|stringData)$
+  #   key_groups:
+  #     - pgp:
+  #       - *oberon
+  #       - *allen

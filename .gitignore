@@ -1,0 +1,6 @@
+# Ansible overides and scratch
+group_vars/localhost.yml
+archive/
+
+# Logs
+*.logs.*
