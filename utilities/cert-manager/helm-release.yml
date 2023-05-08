@@ -16,7 +16,6 @@ spec:
   interval: 1m0s
   targetNamespace: cert-manager
   releaseName: cert-manager
-  prune: true
   install:
     remediation:
       retries: -1
