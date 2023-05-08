@@ -1,0 +1,92 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: cert-manager
+      sourceRef:
+        kind: HelmRepository
+        name: jetstack
+      interval: 1m
+      version: "v1.11.1"
+  interval: 1m0s
+  targetNamespace: cert-manager
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    remediation:
+      retries: -1
+  values:
+    podDnsConfig:
+      nameservers:
+        - "10.2.1.6"
+        - "10.2.1.7"
+    affinity:
+      podAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: group
+                operator: In
+                values:
+                - cert-manager
+            topologyKey: topology.kubernetes.io/zone
+    webhook:
+      replicaCount: 2
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          cpu: 50m
+          memory: 64Mi
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: group
+                  operator: In
+                  values:
+                  - cert-manager
+              topologyKey: topology.kubernetes.io/zone
+    cainjector:
+      enabled: true
+      replicaCount: 2
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          cpu: 50m
+          memory: 64Mi
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: group
+                  operator: In
+                  values:
+                  - cert-manager
+              topologyKey: topology.kubernetes.io/zone
+    startupapicheck:
+      enabled: true
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          cpu: 50m
+          memory: 64Mi

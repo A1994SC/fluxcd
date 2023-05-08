@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: ks-utilities-metric-server
+  namespace: flux-system
+spec:
+  path: "./utilities/metric-server"
+  interval: 10m0s
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: metrics-server
+    namespace: kube-system
