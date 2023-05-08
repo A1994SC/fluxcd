@@ -27,6 +27,7 @@ spec:
       nameservers:
         - "10.2.1.6"
         - "10.2.1.7"
+    installCRDs: true
     affinity:
       podAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
@@ -39,6 +40,7 @@ spec:
                 values:
                 - cert-manager
             topologyKey: topology.kubernetes.io/zone
+    replicaCount: 2
     webhook:
       replicaCount: 2
       resources:
