@@ -39,3 +39,83 @@ patches:
                     drop:
                       - ALL
                   $patch: replace
+  - target:
+      kind: Deployment
+      name: helm-controller
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: helm-controller
+      spec:
+        template:
+          spec:
+            containers:
+            - name: manager
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+                requests:
+                  cpu: 500m
+                  memory: 512Mi
+  - target:
+      kind: Deployment
+      name: kustomize-controller
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: kustomize-controller
+      spec:
+        template:
+          spec:
+            containers:
+            - name: manager
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 200Mi
+                requests:
+                  cpu: 100m
+                  memory: 200Mi
+  - target:
+      kind: Deployment
+      name: notification-controller
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: notification-controller
+      spec:
+        template:
+          spec:
+            containers:
+            - name: manager
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 200Mi
+                requests:
+                  cpu: 100m
+                  memory: 200Mi
+  - target:
+      kind: Deployment
+      name: source-controller
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: source-controller
+      spec:
+        template:
+          spec:
+            containers:
+            - name: manager
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 200Mi
+                requests:
+                  cpu: 100m
+                  memory: 200Mi
