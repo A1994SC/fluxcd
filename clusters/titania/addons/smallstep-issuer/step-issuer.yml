@@ -14,5 +14,5 @@ spec:
    kid: p2-tlIQtHRJdfwu2TzaPrQcY0o7oZYqTXi-194stWhE
    passwordRef:
      name: step-issuer-derpy
-     key: password
+     key: pass
      namespace: cert-manager
