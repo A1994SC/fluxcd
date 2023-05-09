@@ -4,3 +4,6 @@ archive/
 
 # Logs
 *.logs.*
+
+# SOPS extension
+*.decrypted*
