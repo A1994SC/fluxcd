@@ -26,11 +26,11 @@ spec:
         image: gcr.io/k8s-staging-metrics-server/metrics-server:master
         imagePullPolicy: IfNotPresent
         args:
-          - --cert-dir=/tmp
-          - --secure-port=10250
-          - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-          - --kubelet-use-node-status-port
-          - --metric-resolution=15s
+        - --cert-dir=/tmp
+        - --secure-port=10250
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
         resources:
           limits:
             cpu: 500m
@@ -66,7 +66,7 @@ spec:
             type: RuntimeDefault
           capabilities:
             drop:
-              - ALL
+            - ALL
         volumeMounts:
         - name: tmp-dir
           mountPath: /tmp

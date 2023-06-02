@@ -28,9 +28,9 @@ roleRef:
   kind: Role
   name: extension-apiserver-authentication-reader
 subjects:
-  - kind: ServiceAccount
-    name: metrics-server
-    namespace: kube-system
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -41,28 +41,28 @@ roleRef:
   kind: ClusterRole
   name: system:auth-delegator
 subjects:
-  - kind: ServiceAccount
-    name: metrics-server
-    namespace: kube-system
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: system:metrics-server
 rules:
-  - apiGroups: [""]
-    resources:
-      - nodes/metrics
-    verbs:
-      - get
-  - apiGroups: [""]
-    resources:
-      - pods
-      - nodes
-    verbs:
-      - get
-      - list
-      - watch
+- apiGroups: [""]
+  resources:
+  - nodes/metrics
+  verbs:
+  - get
+- apiGroups: [""]
+  resources:
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -73,6 +73,6 @@ roleRef:
   kind: ClusterRole
   name: system:metrics-server
 subjects:
-  - kind: ServiceAccount
-    name: metrics-server
-    namespace: kube-system
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system

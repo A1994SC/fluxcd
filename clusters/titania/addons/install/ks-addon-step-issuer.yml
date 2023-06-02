@@ -21,4 +21,4 @@ spec:
     name: step-issuer
     namespace: cert-manager
   dependsOn:
-    - name: ks-utilities-cert-manager
+  - name: ks-utilities-cert-manager
